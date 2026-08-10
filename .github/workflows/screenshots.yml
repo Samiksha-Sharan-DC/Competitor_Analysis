@@ -1,0 +1,42 @@
+name: Weekly competitor screenshots
+
+on:
+  schedule:
+    # Every Monday at 06:00 IST (00:30 UTC)
+    - cron: '30 0 * * 1'
+  workflow_dispatch: # lets you click "Run" manually from GitHub
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install --with-deps chromium
+
+      - name: Take screenshots
+        run: node capture.js
+
+      - name: Save screenshots to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add screenshots/
+          git add data/
+          # Only commit if something actually changed
+          git diff --staged --quiet || git commit -m "Weekly screenshots $(date +'%Y-%m-%d')"
+          git push
