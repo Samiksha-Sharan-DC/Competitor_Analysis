@@ -1,8 +1,16 @@
 {
   "__meta": {
     "lastRun": "2026-08-10",
-    "totalPages": 16,
-    "errors": []
+    "totalPages": 57,
+    "captured": 57,
+    "errors": [],
+    "sourceTypes": [
+      "docs",
+      "product",
+      "youtube",
+      "review",
+      "article"
+    ]
   },
   "sectigo": {
     "dashboard": [
@@ -12,6 +20,22 @@
         "file": "sectigo__dashboard__dashboard-overview__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "sectigo__dashboard__dashboard-overview"
+      },
+      {
+        "label": "Sectigo — certificate manager product",
+        "url": "https://sectigo.com/products/certificate-manager",
+        "file": "sectigo__dashboard__sectigo-certificate-manager-product__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "product",
+        "key": "sectigo__dashboard__sectigo-certificate-manager-product"
+      },
+      {
+        "label": "Sectigo certificate manager overview",
+        "url": "https://www.youtube.com/watch?v=6bFhlMeHMn4",
+        "file": "sectigo__dashboard__sectigo-certificate-manager-overview__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "youtube",
+        "key": "sectigo__dashboard__sectigo-certificate-manager-overview"
       }
     ],
     "lifecycle": [
@@ -21,6 +45,22 @@
         "file": "sectigo__lifecycle__certificate-enrollment__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "sectigo__lifecycle__certificate-enrollment"
+      },
+      {
+        "label": "SCM — enroll SSL certificate",
+        "url": "https://docs.sectigo.com/scm/en/certificates/ssl-certificates/index.html",
+        "file": "sectigo__lifecycle__scm-enroll-ssl-certificate__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "sectigo__lifecycle__scm-enroll-ssl-certificate"
+      },
+      {
+        "label": "Sectigo SCM demo — certificate enrollment",
+        "url": "https://www.youtube.com/watch?v=dCpDpCf5Vy8",
+        "file": "sectigo__lifecycle__sectigo-scm-demo-certificate-enrollment__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "youtube",
+        "key": "sectigo__lifecycle__sectigo-scm-demo-certificate-enrollment"
       }
     ],
     "integrations": [
@@ -30,6 +70,72 @@
         "file": "sectigo__integrations__acme-api__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "sectigo__integrations__acme-api"
+      },
+      {
+        "label": "SCM — ACME & REST API overview",
+        "url": "https://docs.sectigo.com/scm/en/api/index.html",
+        "file": "sectigo__integrations__scm-acme-rest-api-overview__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "sectigo__integrations__scm-acme-rest-api-overview"
+      }
+    ],
+    "administration": [
+      {
+        "label": "SCM — user roles and permissions",
+        "url": "https://docs.sectigo.com/scm/en/administration/users/index.html",
+        "file": "sectigo__administration__scm-user-roles-and-permissions__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "sectigo__administration__scm-user-roles-and-permissions"
+      }
+    ],
+    "discovery": [
+      {
+        "label": "SCM — certificate discovery",
+        "url": "https://docs.sectigo.com/scm/en/discovery/index.html",
+        "file": "sectigo__discovery__scm-certificate-discovery__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "sectigo__discovery__scm-certificate-discovery"
+      }
+    ],
+    "pricing": [
+      {
+        "label": "Sectigo — pricing page",
+        "url": "https://sectigo.com/pricing",
+        "file": "sectigo__pricing__sectigo-pricing-page__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "product",
+        "key": "sectigo__pricing__sectigo-pricing-page"
+      }
+    ],
+    "support": [
+      {
+        "label": "G2 — Sectigo reviews",
+        "url": "https://www.g2.com/products/sectigo-certificate-manager/reviews",
+        "file": "sectigo__support__g2-sectigo-reviews__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "review",
+        "key": "sectigo__support__g2-sectigo-reviews"
+      },
+      {
+        "label": "Capterra — Sectigo reviews",
+        "url": "https://www.capterra.com/p/176056/Sectigo-Certificate-Manager/",
+        "file": "sectigo__support__capterra-sectigo-reviews__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "review",
+        "key": "sectigo__support__capterra-sectigo-reviews"
+      }
+    ],
+    "security": [
+      {
+        "label": "SC Magazine — Sectigo coverage",
+        "url": "https://www.scmagazine.com/keyword/sectigo",
+        "file": "sectigo__security__sc-magazine-sectigo-coverage__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "article",
+        "key": "sectigo__security__sc-magazine-sectigo-coverage"
       }
     ]
   },
@@ -41,6 +147,22 @@
         "file": "globalsign__dashboard__atlas-portal-overview__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "globalsign__dashboard__atlas-portal-overview"
+      },
+      {
+        "label": "GlobalSign — managed SSL overview",
+        "url": "https://www.globalsign.com/en/ssl/managed-ssl/",
+        "file": "globalsign__dashboard__globalsign-managed-ssl-overview__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "product",
+        "key": "globalsign__dashboard__globalsign-managed-ssl-overview"
+      },
+      {
+        "label": "GlobalSign Atlas portal overview",
+        "url": "https://www.youtube.com/watch?v=rTPjkJVJNjk",
+        "file": "globalsign__dashboard__globalsign-atlas-portal-overview__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "youtube",
+        "key": "globalsign__dashboard__globalsign-atlas-portal-overview"
       }
     ],
     "lifecycle": [
@@ -50,6 +172,14 @@
         "file": "globalsign__lifecycle__certificate-ordering__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "globalsign__lifecycle__certificate-ordering"
+      },
+      {
+        "label": "Atlas — order a certificate",
+        "url": "https://support.globalsign.com/ssl/ssl-certificates-installation/order-ssl-certificate",
+        "file": "globalsign__lifecycle__atlas-order-a-certificate__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "globalsign__lifecycle__atlas-order-a-certificate"
       }
     ],
     "inventory": [
@@ -59,6 +189,72 @@
         "file": "globalsign__inventory__certificate-inventory__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "globalsign__inventory__certificate-inventory"
+      },
+      {
+        "label": "Atlas — certificate inventory",
+        "url": "https://support.globalsign.com/atlas/atlas-ssl-tls-management",
+        "file": "globalsign__inventory__atlas-certificate-inventory__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "globalsign__inventory__atlas-certificate-inventory"
+      }
+    ],
+    "administration": [
+      {
+        "label": "Atlas — user management",
+        "url": "https://support.globalsign.com/atlas/atlas-account-management",
+        "file": "globalsign__administration__atlas-user-management__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "globalsign__administration__atlas-user-management"
+      }
+    ],
+    "integrations": [
+      {
+        "label": "Atlas — REST API documentation",
+        "url": "https://www.globalsign.com/en/resources/apis/api-documentation/globalsign_api.html",
+        "file": "globalsign__integrations__atlas-rest-api-documentation__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "globalsign__integrations__atlas-rest-api-documentation"
+      }
+    ],
+    "pricing": [
+      {
+        "label": "GlobalSign — certificate pricing",
+        "url": "https://www.globalsign.com/en/ssl/ssl-certificate-products/",
+        "file": "globalsign__pricing__globalsign-certificate-pricing__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "product",
+        "key": "globalsign__pricing__globalsign-certificate-pricing"
+      }
+    ],
+    "support": [
+      {
+        "label": "G2 — GlobalSign reviews",
+        "url": "https://www.g2.com/products/globalsign/reviews",
+        "file": "globalsign__support__g2-globalsign-reviews__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "review",
+        "key": "globalsign__support__g2-globalsign-reviews"
+      },
+      {
+        "label": "Trustpilot — GlobalSign reviews",
+        "url": "https://www.trustpilot.com/review/www.globalsign.com",
+        "file": "globalsign__support__trustpilot-globalsign-reviews__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "review",
+        "key": "globalsign__support__trustpilot-globalsign-reviews"
+      }
+    ],
+    "security": [
+      {
+        "label": "TechCrunch — GlobalSign coverage",
+        "url": "https://techcrunch.com/?s=globalsign",
+        "file": "globalsign__security__techcrunch-globalsign-coverage__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "article",
+        "key": "globalsign__security__techcrunch-globalsign-coverage"
       }
     ]
   },
@@ -70,6 +266,14 @@
         "file": "aws__dashboard__acm-overview__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "aws__dashboard__acm-overview"
+      },
+      {
+        "label": "AWS ACM — product overview",
+        "url": "https://aws.amazon.com/certificate-manager/",
+        "file": "aws__dashboard__aws-acm-product-overview__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "product",
+        "key": "aws__dashboard__aws-acm-product-overview"
       }
     ],
     "lifecycle": [
@@ -79,6 +283,30 @@
         "file": "aws__lifecycle__requesting-a-certificate__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "aws__lifecycle__requesting-a-certificate"
+      },
+      {
+        "label": "ACM — request a public certificate",
+        "url": "https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html",
+        "file": "aws__lifecycle__acm-request-a-public-certificate__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "aws__lifecycle__acm-request-a-public-certificate"
+      },
+      {
+        "label": "ACM — managed renewal overview",
+        "url": "https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html",
+        "file": "aws__lifecycle__acm-managed-renewal-overview__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "aws__lifecycle__acm-managed-renewal-overview"
+      },
+      {
+        "label": "AWS ACM — getting started demo",
+        "url": "https://www.youtube.com/watch?v=XtiluGirMys",
+        "file": "aws__lifecycle__aws-acm-getting-started-demo__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "youtube",
+        "key": "aws__lifecycle__aws-acm-getting-started-demo"
       }
     ],
     "pricing": [
@@ -88,6 +316,80 @@
         "file": "aws__pricing__acm-pricing__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "aws__pricing__acm-pricing"
+      },
+      {
+        "label": "AWS ACM — pricing",
+        "url": "https://aws.amazon.com/certificate-manager/pricing/",
+        "file": "aws__pricing__aws-acm-pricing__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "product",
+        "key": "aws__pricing__aws-acm-pricing"
+      }
+    ],
+    "integrations": [
+      {
+        "label": "ACM — CLI reference",
+        "url": "https://docs.aws.amazon.com/cli/latest/reference/acm/index.html",
+        "file": "aws__integrations__acm-cli-reference__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "aws__integrations__acm-cli-reference"
+      },
+      {
+        "label": "AWS ACM — CLI walkthrough",
+        "url": "https://www.youtube.com/watch?v=pFr5kDsIzF8",
+        "file": "aws__integrations__aws-acm-cli-walkthrough__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "youtube",
+        "key": "aws__integrations__aws-acm-cli-walkthrough"
+      }
+    ],
+    "administration": [
+      {
+        "label": "ACM — IAM access control",
+        "url": "https://docs.aws.amazon.com/acm/latest/userguide/authen-overview.html",
+        "file": "aws__administration__acm-iam-access-control__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "aws__administration__acm-iam-access-control"
+      }
+    ],
+    "analytics": [
+      {
+        "label": "ACM — CloudWatch metrics",
+        "url": "https://docs.aws.amazon.com/acm/latest/userguide/cloudwatch-metrics.html",
+        "file": "aws__analytics__acm-cloudwatch-metrics__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "aws__analytics__acm-cloudwatch-metrics"
+      }
+    ],
+    "support": [
+      {
+        "label": "G2 — AWS ACM reviews",
+        "url": "https://www.g2.com/products/aws-certificate-manager/reviews",
+        "file": "aws__support__g2-aws-acm-reviews__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "review",
+        "key": "aws__support__g2-aws-acm-reviews"
+      },
+      {
+        "label": "Gartner Peer Insights — AWS ACM",
+        "url": "https://www.gartner.com/reviews/market/ssl-tls-certificates/vendor/amazon-web-services/product/aws-certificate-manager",
+        "file": "aws__support__gartner-peer-insights-aws-acm__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "review",
+        "key": "aws__support__gartner-peer-insights-aws-acm"
+      }
+    ],
+    "security": [
+      {
+        "label": "The New Stack — AWS ACM coverage",
+        "url": "https://thenewstack.io/?s=aws+certificate+manager",
+        "file": "aws__security__the-new-stack-aws-acm-coverage__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "article",
+        "key": "aws__security__the-new-stack-aws-acm-coverage"
       }
     ]
   },
@@ -99,6 +401,14 @@
         "file": "letsencrypt__dashboard__getting-started__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "letsencrypt__dashboard__getting-started"
+      },
+      {
+        "label": "Let's Encrypt — about page",
+        "url": "https://letsencrypt.org/about/",
+        "file": "letsencrypt__dashboard__let-s-encrypt-about-page__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "product",
+        "key": "letsencrypt__dashboard__let-s-encrypt-about-page"
       }
     ],
     "lifecycle": [
@@ -108,6 +418,30 @@
         "file": "letsencrypt__lifecycle__how-it-works__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "letsencrypt__lifecycle__how-it-works"
+      },
+      {
+        "label": "Let's Encrypt — how it works",
+        "url": "https://letsencrypt.org/how-it-works/",
+        "file": "letsencrypt__lifecycle__let-s-encrypt-how-it-works__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "letsencrypt__lifecycle__let-s-encrypt-how-it-works"
+      },
+      {
+        "label": "Certbot — getting started",
+        "url": "https://certbot.eff.org/instructions",
+        "file": "letsencrypt__lifecycle__certbot-getting-started__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "letsencrypt__lifecycle__certbot-getting-started"
+      },
+      {
+        "label": "Let's Encrypt — how it works explained",
+        "url": "https://www.youtube.com/watch?v=jrR_WfgmWEw",
+        "file": "letsencrypt__lifecycle__let-s-encrypt-how-it-works-explained__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "youtube",
+        "key": "letsencrypt__lifecycle__let-s-encrypt-how-it-works-explained"
       }
     ],
     "pricing": [
@@ -117,6 +451,68 @@
         "file": "letsencrypt__pricing__pricing-free__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "letsencrypt__pricing__pricing-free"
+      },
+      {
+        "label": "Let's Encrypt — free certificates",
+        "url": "https://letsencrypt.org/getting-started/",
+        "file": "letsencrypt__pricing__let-s-encrypt-free-certificates__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "product",
+        "key": "letsencrypt__pricing__let-s-encrypt-free-certificates"
+      }
+    ],
+    "integrations": [
+      {
+        "label": "Let's Encrypt — ACME client list",
+        "url": "https://letsencrypt.org/docs/client-options/",
+        "file": "letsencrypt__integrations__let-s-encrypt-acme-client-list__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "letsencrypt__integrations__let-s-encrypt-acme-client-list"
+      },
+      {
+        "label": "Certbot — installation walkthrough",
+        "url": "https://www.youtube.com/watch?v=lv6vgvMUZWI",
+        "file": "letsencrypt__integrations__certbot-installation-walkthrough__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "youtube",
+        "key": "letsencrypt__integrations__certbot-installation-walkthrough"
+      }
+    ],
+    "security": [
+      {
+        "label": "Let's Encrypt — certificate compatibility",
+        "url": "https://letsencrypt.org/docs/certificate-compatibility/",
+        "file": "letsencrypt__security__let-s-encrypt-certificate-compatibility__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "letsencrypt__security__let-s-encrypt-certificate-compatibility"
+      },
+      {
+        "label": "Ars Technica — Let's Encrypt coverage",
+        "url": "https://arstechnica.com/search/?query=lets+encrypt",
+        "file": "letsencrypt__security__ars-technica-let-s-encrypt-coverage__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "article",
+        "key": "letsencrypt__security__ars-technica-let-s-encrypt-coverage"
+      }
+    ],
+    "support": [
+      {
+        "label": "G2 — Let's Encrypt reviews",
+        "url": "https://www.g2.com/products/let-s-encrypt/reviews",
+        "file": "letsencrypt__support__g2-let-s-encrypt-reviews__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "review",
+        "key": "letsencrypt__support__g2-let-s-encrypt-reviews"
+      },
+      {
+        "label": "Trustpilot — Let's Encrypt",
+        "url": "https://www.trustpilot.com/review/letsencrypt.org",
+        "file": "letsencrypt__support__trustpilot-let-s-encrypt__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "review",
+        "key": "letsencrypt__support__trustpilot-let-s-encrypt"
       }
     ]
   },
@@ -128,6 +524,14 @@
         "file": "cloudflare__dashboard__ssl-tls-overview__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "cloudflare__dashboard__ssl-tls-overview"
+      },
+      {
+        "label": "Cloudflare — SSL overview",
+        "url": "https://www.cloudflare.com/ssl/",
+        "file": "cloudflare__dashboard__cloudflare-ssl-overview__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "product",
+        "key": "cloudflare__dashboard__cloudflare-ssl-overview"
       }
     ],
     "lifecycle": [
@@ -137,6 +541,30 @@
         "file": "cloudflare__lifecycle__edge-certificates__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "cloudflare__lifecycle__edge-certificates"
+      },
+      {
+        "label": "Cloudflare — edge certificates",
+        "url": "https://developers.cloudflare.com/ssl/edge-certificates/",
+        "file": "cloudflare__lifecycle__cloudflare-edge-certificates__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "cloudflare__lifecycle__cloudflare-edge-certificates"
+      },
+      {
+        "label": "Cloudflare — advanced cert manager",
+        "url": "https://developers.cloudflare.com/ssl/edge-certificates/advanced-certificate-manager/",
+        "file": "cloudflare__lifecycle__cloudflare-advanced-cert-manager__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "cloudflare__lifecycle__cloudflare-advanced-cert-manager"
+      },
+      {
+        "label": "Cloudflare SSL — full setup walkthrough",
+        "url": "https://www.youtube.com/watch?v=M7l5e5uBMkw",
+        "file": "cloudflare__lifecycle__cloudflare-ssl-full-setup-walkthrough__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "youtube",
+        "key": "cloudflare__lifecycle__cloudflare-ssl-full-setup-walkthrough"
       }
     ],
     "integrations": [
@@ -146,6 +574,14 @@
         "file": "cloudflare__integrations__api-terraform__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "cloudflare__integrations__api-terraform"
+      },
+      {
+        "label": "Cloudflare — Terraform SSL/TLS",
+        "url": "https://developers.cloudflare.com/terraform/additional-configurations/ssl-tls/",
+        "file": "cloudflare__integrations__cloudflare-terraform-ssl-tls__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "cloudflare__integrations__cloudflare-terraform-ssl-tls"
       }
     ],
     "pricing": [
@@ -155,6 +591,76 @@
         "file": "cloudflare__pricing__pricing__2026-08-10.png",
         "capturedAt": "2026-08-10",
         "key": "cloudflare__pricing__pricing"
+      },
+      {
+        "label": "Cloudflare — plans and pricing",
+        "url": "https://www.cloudflare.com/plans/",
+        "file": "cloudflare__pricing__cloudflare-plans-and-pricing__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "product",
+        "key": "cloudflare__pricing__cloudflare-plans-and-pricing"
+      }
+    ],
+    "security": [
+      {
+        "label": "Cloudflare — mTLS client certs",
+        "url": "https://developers.cloudflare.com/ssl/client-certificates/",
+        "file": "cloudflare__security__cloudflare-mtls-client-certs__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "cloudflare__security__cloudflare-mtls-client-certs"
+      },
+      {
+        "label": "Cloudflare mTLS — product demo",
+        "url": "https://www.youtube.com/watch?v=mGC2ysFdBDo",
+        "file": "cloudflare__security__cloudflare-mtls-product-demo__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "youtube",
+        "key": "cloudflare__security__cloudflare-mtls-product-demo"
+      },
+      {
+        "label": "TechCrunch — Cloudflare coverage",
+        "url": "https://techcrunch.com/tag/cloudflare/",
+        "file": "cloudflare__security__techcrunch-cloudflare-coverage__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "article",
+        "key": "cloudflare__security__techcrunch-cloudflare-coverage"
+      },
+      {
+        "label": "The Register — Cloudflare SSL news",
+        "url": "https://www.theregister.com/Tag/Cloudflare/",
+        "file": "cloudflare__security__the-register-cloudflare-ssl-news__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "article",
+        "key": "cloudflare__security__the-register-cloudflare-ssl-news"
+      }
+    ],
+    "analytics": [
+      {
+        "label": "Cloudflare — SSL/TLS analytics",
+        "url": "https://developers.cloudflare.com/ssl/reference/analytics/",
+        "file": "cloudflare__analytics__cloudflare-ssl-tls-analytics__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "docs",
+        "key": "cloudflare__analytics__cloudflare-ssl-tls-analytics"
+      }
+    ],
+    "support": [
+      {
+        "label": "G2 — Cloudflare reviews",
+        "url": "https://www.g2.com/products/cloudflare/reviews",
+        "file": "cloudflare__support__g2-cloudflare-reviews__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "review",
+        "key": "cloudflare__support__g2-cloudflare-reviews"
+      },
+      {
+        "label": "Trustpilot — Cloudflare reviews",
+        "url": "https://www.trustpilot.com/review/www.cloudflare.com",
+        "file": "cloudflare__support__trustpilot-cloudflare-reviews__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "type": "review",
+        "key": "cloudflare__support__trustpilot-cloudflare-reviews"
       }
     ]
   }
