@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Competitor Intelligence Board</title>
+<style>
+  :root {
+    --ink: #0f1b2d;
+    --ink2: #3d4a5c;
+    --ink3: #7a8799;
+    --paper: #f4f6f8;
+    --card: #ffffff;
+    --rule: #dde2ea;
+    --rule-hard: #b8c2ce;
+    --change: #b45309;
+    --changebg: #fef3c7;
+    --verified: #0f766e;
+    --verifiedbg: #f0fdfa;
+    --missing: #6b7280;
+    --missingbg: #f9fafb;
+    --danger: #dc2626;
+    --dangerbg: #fef2f2;
+    --col-w: 260px;
+    --row-head-w: 180px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'IBM Plex Sans', system-ui, sans-serif; background: var(--paper); color: var(--ink); font-size: 13px; line-height: 1.5; }
+
+  /* TOP BAR */
+  .topbar { position: sticky; top: 0; z-index: 10; background: var(--ink); color: #fff; padding: 0 16px; height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .topbar h1 { font-size: 14px; font-weight: 500; letter-spacing: .01em; }
+  .topbar-right { display: flex; align-items: center; gap: 10px; }
+  .run-info { font-size: 11px; color: #94a3b8; font-family: monospace; }
+  .refresh-btn { font-size: 11px; padding: 4px 10px; border: 0.5px solid #475569; border-radius: 4px; background: none; color: #cbd5e1; cursor: pointer; }
+  .refresh-btn:hover { background: #1e293b; }
+
+  /* FILTERS */
+  .filters { padding: 8px 12px; background: var(--card); border-bottom: 0.5px solid var(--rule); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .filter-pill { font-size: 11px; padding: 4px 10px; border: 0.5px solid var(--rule); border-radius: 20px; cursor: pointer; background: var(--paper); color: var(--ink2); user-select: none; }
+  .filter-pill.active { background: var(--changebg); border-color: var(--change); color: var(--change); }
+  .filters input { font-size: 12px; padding: 4px 10px; border: 0.5px solid var(--rule); border-radius: 4px; background: var(--paper); color: var(--ink); min-width: 180px; }
+  .filter-label { font-size: 11px; color: var(--ink3); text-transform: uppercase; letter-spacing: .05em; }
+
+  /* BOARD */
+  .board-wrap { overflow: auto; max-height: calc(100vh - 88px); }
+  .board { display: grid; width: max-content; }
+  .corner { position: sticky; left: 0; top: 0; z-index: 4; width: var(--row-head-w); min-width: var(--row-head-w); background: var(--ink); color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; padding: 10px 12px; border-right: 0.5px solid #334155; border-bottom: 0.5px solid #334155; }
+  .col-head { position: sticky; top: 0; z-index: 3; background: var(--ink); color: #fff; border-right: 0.5px solid #334155; border-bottom: 0.5px solid #334155; padding: 10px 12px; min-width: var(--col-w); max-width: var(--col-w); }
+  .col-name { font-size: 13px; font-weight: 500; }
+  .col-type { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: .05em; margin-top: 2px; }
+  .row-head { position: sticky; left: 0; z-index: 2; background: var(--card); border-right: 0.5px solid var(--rule-hard); border-bottom: 0.5px solid var(--rule); padding: 10px; width: var(--row-head-w); min-width: var(--row-head-w); }
+  .row-name { font-weight: 500; font-size: 12px; }
+  .row-desc { font-size: 10px; color: var(--ink3); margin-top: 3px; line-height: 1.4; }
+  .cell { border-right: 0.5px solid var(--rule); border-bottom: 0.5px solid var(--rule); padding: 10px; background: var(--card); min-width: var(--col-w); max-width: var(--col-w); vertical-align: top; }
+
+  /* CELL CONTENTS */
+  .shot-wrap { position: relative; margin-bottom: 8px; }
+  .shot-num { font-size: 9px; font-family: monospace; color: var(--ink3); padding: 2px 5px; background: var(--paper); border: 0.5px solid var(--rule); border-bottom: none; display: inline-block; }
+  .shot-img { width: 100%; display: block; border: 0.5px solid var(--rule); cursor: zoom-in; transition: opacity .15s; }
+  .shot-img:hover { opacity: .9; }
+  .shot-cap { font-size: 10px; color: var(--ink2); padding: 4px 0 2px; line-height: 1.4; }
+  .shot-date { font-size: 9px; font-family: monospace; color: var(--ink3); }
+  .shot-url { font-size: 9px; color: var(--verified); text-decoration: none; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .shot-url:hover { text-decoration: underline; }
+
+  /* BADGES */
+  .badge-changed { display: inline-flex; align-items: center; gap: 3px; font-size: 9px; font-weight: 500; padding: 2px 6px; border-radius: 20px; background: var(--changebg); color: var(--change); margin-top: 4px; }
+  .badge-missing { display: flex; flex-direction: column; gap: 3px; padding: 8px; border: 0.5px dashed var(--rule-hard); background: var(--missingbg); border-radius: 4px; }
+  .badge-missing .m-label { font-size: 11px; color: var(--missing); font-style: italic; }
+  .badge-missing .m-date { font-size: 9px; font-family: monospace; color: var(--ink3); }
+  .badge-error { display: flex; flex-direction: column; gap: 3px; padding: 8px; border: 0.5px dashed #fca5a5; background: var(--dangerbg); border-radius: 4px; }
+  .badge-error .e-label { font-size: 11px; color: var(--danger); }
+  .badge-error .e-date { font-size: 9px; font-family: monospace; color: var(--ink3); }
+
+  /* LIGHTBOX */
+  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 100; align-items: center; justify-content: center; flex-direction: column; gap: 12px; }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 80vh; object-fit: contain; border: 1px solid #334155; }
+  .lightbox-meta { color: #94a3b8; font-size: 12px; text-align: center; }
+  .lightbox-meta a { color: #7dd3fc; }
+  .lightbox-close { position: absolute; top: 16px; right: 20px; color: #fff; font-size: 28px; cursor: pointer; background: none; border: none; line-height: 1; }
+
+  /* LOADING */
+  .loading { display: flex; align-items: center; justify-content: center; height: 200px; color: var(--ink3); font-size: 13px; gap: 8px; }
+  .spinner { width: 16px; height: 16px; border: 2px solid var(--rule); border-top-color: var(--verified); border-radius: 50%; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* NO DATA */
+  .no-data { padding: 40px; text-align: center; color: var(--ink3); }
+  .no-data h2 { font-size: 16px; font-weight: 500; color: var(--ink2); margin-bottom: 8px; }
+  .no-data p { font-size: 13px; line-height: 1.7; max-width: 500px; margin: 0 auto; }
+  .no-data code { font-family: monospace; background: var(--paper); border: 0.5px solid var(--rule); padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+
+  /* FOOTER */
+  .footer { padding: 10px 16px; font-size: 11px; color: var(--ink3); border-top: 0.5px solid var(--rule); background: var(--card); display: flex; gap: 16px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Competitor Intelligence Board</h1>
+  <div class="topbar-right">
+    <span class="run-info" id="run-info">Loading…</span>
+    <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
+  </div>
+</div>
+
+<div class="filters">
+  <span class="filter-label">Filter:</span>
+  <span class="filter-pill" id="pill-changed" onclick="toggleFilter('changed')">Changed this week</span>
+  <span class="filter-pill" id="pill-missing" onclick="toggleFilter('missing')">Missing screenshots</span>
+  <input type="text" id="search" placeholder="Search categories…" oninput="renderBoard()">
+</div>
+
+<div id="board-container">
+  <div class="loading"><div class="spinner"></div> Loading screenshots…</div>
+</div>
+
+<div class="footer">
+  <span>Screenshots captured automatically every Monday by GitHub Actions.</span>
+  <span>Click any screenshot to enlarge. Source links open the original page.</span>
+  <span id="footer-meta"></span>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-meta" id="lightbox-meta"></div>
+</div>
+
+<script>
+// ─── Config ──────────────────────────────────────────────────────────────────
+
+const COMPETITORS = [
+  { slug: 'sectigo',      name: 'Sectigo',                  type: 'Commercial CA' },
+  { slug: 'globalsign',   name: 'GlobalSign',               type: 'Commercial CA' },
+  { slug: 'aws',          name: 'AWS Certificate Manager',  type: 'Cloud provider' },
+  { slug: 'letsencrypt',  name: "Let's Encrypt",            type: 'ACME CA' },
+  { slug: 'cloudflare',   name: 'Cloudflare',               type: 'CDN / cloud' },
+];
+
+const CATEGORIES = [
+  { slug: 'dashboard',      name: 'Dashboard & landing',           desc: 'First-run experience and overview' },
+  { slug: 'inventory',      name: 'Certificate inventory',         desc: 'Listing, searching, filtering certificates' },
+  { slug: 'lifecycle',      name: 'Certificate lifecycle',         desc: 'Request, issue, renew, revoke' },
+  { slug: 'discovery',      name: 'Discovery',                     desc: 'Finding unknown certificates' },
+  { slug: 'analytics',      name: 'Analytics & reporting',         desc: 'Charts, exports, scheduled reports' },
+  { slug: 'administration', name: 'Administration',                desc: 'Users, roles, organisations' },
+  { slug: 'integrations',   name: 'Integrations & automation',     desc: 'API, CLI, ACME, Terraform' },
+  { slug: 'support',        name: 'Support model',                 desc: 'Help channels and human intervention' },
+  { slug: 'pricing',        name: 'Pricing & packaging',           desc: 'Published pricing and tiers' },
+  { slug: 'security',       name: 'Security & compliance',         desc: 'Audit, governance, certifications' },
+];
+
+// Which categories each competitor genuinely has no UI for
+const NOT_APPLICABLE = {
+  letsencrypt: ['dashboard', 'inventory', 'discovery', 'analytics', 'administration'],
+  aws: ['discovery'],
+  cloudflare: ['discovery'],
+};
+
+// ─── State ───────────────────────────────────────────────────────────────────
+
+let DATA = null;
+let FILTERS = { changed: false, missing: false };
+let LIGHTBOX_QUEUE = [];
+let LIGHTBOX_IDX = 0;
+
+// ─── Data loading ─────────────────────────────────────────────────────────────
+
+async function loadData() {
+  document.getElementById('board-container').innerHTML =
+    '<div class="loading"><div class="spinner"></div> Loading screenshots…</div>';
+
+  try {
+    // Cache-bust so we always get the latest after a Monday run
+    const res = await fetch('data/latest.json?t=' + Date.now());
+    if (!res.ok) throw new Error('data/latest.json not found');
+    DATA = await res.json();
+    renderBoard();
+  } catch (err) {
+    // No data yet — show a helpful empty state
+    showNoData();
+  }
+}
+
+function showNoData() {
+  document.getElementById('board-container').innerHTML = `
+    <div class="no-data">
+      <h2>No screenshots yet</h2>
+      <p>
+        The board is ready. Screenshots will appear here after the first GitHub Actions run.<br><br>
+        To capture screenshots now without waiting for Monday:<br><br>
+        1. Go to your GitHub repository<br>
+        2. Click <strong>Actions</strong> in the top menu<br>
+        3. Click <strong>Weekly competitor screenshots</strong> on the left<br>
+        4. Click <strong>Run workflow</strong> → <strong>Run workflow</strong><br><br>
+        Come back in about 10 minutes and refresh this page.
+      </p>
+    </div>`;
+  document.getElementById('run-info').textContent = 'No data yet';
+}
+
+// ─── Rendering ────────────────────────────────────────────────────────────────
+
+function renderBoard() {
+  if (!DATA) return;
+
+  const meta = DATA.__meta || {};
+  const lastRun = meta.lastRun || '—';
+  const errors = (meta.errors || []).length;
+  document.getElementById('run-info').textContent =
+    `Last run: ${lastRun}${errors ? ` · ${errors} error(s)` : ''}`;
+  document.getElementById('footer-meta').textContent =
+    `${meta.totalPages || 0} pages monitored · ${errors} failed last run`;
+
+  const search = (document.getElementById('search').value || '').toLowerCase();
+  const visibleCats = CATEGORIES.filter(c =>
+    !search || c.name.toLowerCase().includes(search) || c.desc.toLowerCase().includes(search)
+  );
+
+  const cols = COMPETITORS.length;
+  let html = `<div class="board" style="grid-template-columns:${180}px repeat(${cols},260px)">`;
+
+  // Corner
+  html += `<div class="corner">Category / workflow</div>`;
+
+  // Column headers
+  COMPETITORS.forEach(comp => {
+    html += `<div class="col-head"><div class="col-name">${comp.name}</div><div class="col-type">${comp.type}</div></div>`;
+  });
+
+  // Rows
+  visibleCats.forEach(cat => {
+    html += `<div class="row-head"><div class="row-name">${cat.name}</div><div class="row-desc">${cat.desc}</div></div>`;
+
+    COMPETITORS.forEach(comp => {
+      html += renderCell(comp, cat);
+    });
+  });
+
+  html += '</div>';
+  document.getElementById('board-container').innerHTML = html;
+}
+
+function renderCell(comp, cat) {
+  // Not applicable
+  const na = (NOT_APPLICABLE[comp.slug] || []).includes(cat.slug);
+  if (na) {
+    return `<div class="cell">
+      <div class="badge-missing">
+        <span class="m-label">Not applicable to this service model</span>
+        <span class="m-date">By design — no equivalent surface</span>
+      </div>
+    </div>`;
+  }
+
+  const compData = DATA[comp.slug] || {};
+  const shots = compData[cat.slug] || [];
+
+  // No screenshots at all
+  if (shots.length === 0) {
+    return `<div class="cell">
+      <div class="badge-missing">
+        <span class="m-label">Not yet captured</span>
+        <span class="m-date">Will appear after first Monday run</span>
+      </div>
+    </div>`;
+  }
+
+  // Check filters
+  const today = DATA.__meta?.lastRun;
+  const latestShot = shots[shots.length - 1];
+  const isNew = latestShot.capturedAt === today;
+  const hasError = !!latestShot.lastError;
+
+  if (FILTERS.changed && !isNew) return `<div class="cell" style="background:var(--paper)"></div>`;
+  if (FILTERS.missing && shots.length > 0 && !hasError) return `<div class="cell" style="background:var(--paper)"></div>`;
+
+  let inner = '';
+
+  // Show up to 3 screenshots stacked
+  const visible = shots.slice(-3).reverse();
+  visible.forEach((shot, i) => {
+    const imgPath = `screenshots/${shot.file}`;
+    const isLatest = i === 0;
+    inner += `
+      <div class="shot-wrap">
+        <div class="shot-num">Step ${visible.length - i}</div>
+        <img
+          class="shot-img"
+          src="${imgPath}"
+          alt="${shot.label}"
+          loading="lazy"
+          onclick="openLightbox('${imgPath}', '${escHtml(shot.label)}', '${escHtml(shot.url)}', '${shot.capturedAt}')"
+          onerror="this.parentElement.innerHTML='<div class=\\'badge-error\\'><span class=\\'e-label\\'>Image not loaded</span><span class=\\'e-date\\'>${shot.capturedAt}</span></div>'"
+        >
+        <div class="shot-cap">${escHtml(shot.label)}</div>
+        <div class="shot-date">Captured ${shot.capturedAt}</div>
+        <a class="shot-url" href="${escHtml(shot.url)}" target="_blank" rel="noopener noreferrer">${escHtml(shot.url)}</a>
+        ${isLatest && isNew ? '<div><span class="badge-changed">↑ Updated this week</span></div>' : ''}
+      </div>`;
+  });
+
+  if (hasError) {
+    inner += `<div class="badge-error">
+      <span class="e-label">Last capture failed — showing previous</span>
+      <span class="e-date">${latestShot.lastError.date}: ${escHtml(latestShot.lastError.message)}</span>
+    </div>`;
+  }
+
+  return `<div class="cell">${inner}</div>`;
+}
+
+// ─── Filters ─────────────────────────────────────────────────────────────────
+
+function toggleFilter(name) {
+  FILTERS[name] = !FILTERS[name];
+  document.getElementById(`pill-${name}`).classList.toggle('active', FILTERS[name]);
+  renderBoard();
+}
+
+// ─── Lightbox ────────────────────────────────────────────────────────────────
+
+function openLightbox(src, label, url, date) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-meta').innerHTML =
+    `<strong>${label}</strong> · Captured ${date}<br>
+     <a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// ─── Utils ───────────────────────────────────────────────────────────────────
+
+function escHtml(str) {
+  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// ─── Init ────────────────────────────────────────────────────────────────────
+
+loadData();
+</script>
+</body>
+</html>
