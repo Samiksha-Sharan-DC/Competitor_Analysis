@@ -6,111 +6,118 @@
 <title>Competitor Intelligence Board</title>
 <style>
   :root {
-    --ink: #0f1b2d;
-    --ink2: #3d4a5c;
-    --ink3: #7a8799;
-    --paper: #f4f6f8;
-    --card: #ffffff;
-    --rule: #dde2ea;
-    --rule-hard: #b8c2ce;
-    --change: #b45309;
-    --changebg: #fef3c7;
-    --verified: #0f766e;
-    --verifiedbg: #f0fdfa;
-    --missing: #6b7280;
-    --missingbg: #f9fafb;
-    --danger: #dc2626;
-    --dangerbg: #fef2f2;
-    --col-w: 260px;
-    --row-head-w: 180px;
+    --ink:#0f1b2d;--ink2:#3d4a5c;--ink3:#7a8799;
+    --paper:#f4f6f8;--card:#ffffff;--rule:#dde2ea;--rule-hard:#b8c2ce;
+    --change:#b45309;--changebg:#fef3c7;
+    --verified:#0f766e;--verifiedbg:#f0fdfa;
+    --missing:#6b7280;--missingbg:#f9fafb;
+    --danger:#dc2626;--dangerbg:#fef2f2;
+    --col-w:270px;--row-head-w:175px;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'IBM Plex Sans', system-ui, sans-serif; background: var(--paper); color: var(--ink); font-size: 13px; line-height: 1.5; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:var(--paper);color:var(--ink);font-size:13px;line-height:1.5}
 
-  /* TOP BAR */
-  .topbar { position: sticky; top: 0; z-index: 10; background: var(--ink); color: #fff; padding: 0 16px; height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .topbar h1 { font-size: 14px; font-weight: 500; letter-spacing: .01em; }
-  .topbar-right { display: flex; align-items: center; gap: 10px; }
-  .run-info { font-size: 11px; color: #94a3b8; font-family: monospace; }
-  .refresh-btn { font-size: 11px; padding: 4px 10px; border: 0.5px solid #475569; border-radius: 4px; background: none; color: #cbd5e1; cursor: pointer; }
-  .refresh-btn:hover { background: #1e293b; }
+  .topbar{position:sticky;top:0;z-index:10;background:var(--ink);color:#fff;padding:0 16px;height:46px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .topbar h1{font-size:14px;font-weight:500}
+  .run-info{font-size:11px;color:#94a3b8;font-family:monospace}
+  .refresh-btn{font-size:11px;padding:4px 10px;border:0.5px solid #475569;border-radius:4px;background:none;color:#cbd5e1;cursor:pointer}
+  .refresh-btn:hover{background:#1e293b}
 
-  /* FILTERS */
-  .filters { padding: 8px 12px; background: var(--card); border-bottom: 0.5px solid var(--rule); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .filter-pill { font-size: 11px; padding: 4px 10px; border: 0.5px solid var(--rule); border-radius: 20px; cursor: pointer; background: var(--paper); color: var(--ink2); user-select: none; }
-  .filter-pill.active { background: var(--changebg); border-color: var(--change); color: var(--change); }
-  .filters input { font-size: 12px; padding: 4px 10px; border: 0.5px solid var(--rule); border-radius: 4px; background: var(--paper); color: var(--ink); min-width: 180px; }
-  .filter-label { font-size: 11px; color: var(--ink3); text-transform: uppercase; letter-spacing: .05em; }
+  .filters{padding:8px 12px;background:var(--card);border-bottom:0.5px solid var(--rule);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .pill{font-size:11px;padding:4px 10px;border:0.5px solid var(--rule);border-radius:20px;cursor:pointer;background:var(--paper);color:var(--ink2);user-select:none;transition:all .15s}
+  .pill.active{background:var(--changebg);border-color:var(--change);color:var(--change)}
+  .pill.docs{background:#eff6ff;border-color:#bfdbfe;color:#1d4ed8}
+  .pill.docs.active{background:#1d4ed8;color:#fff}
+  .pill.youtube{background:#fef2f2;border-color:#fecaca;color:#dc2626}
+  .pill.youtube.active{background:#dc2626;color:#fff}
+  .pill.review{background:#f0fdf4;border-color:#bbf7d0;color:#15803d}
+  .pill.review.active{background:#15803d;color:#fff}
+  .pill.article{background:#fdf4ff;border-color:#e9d5ff;color:#7e22ce}
+  .pill.article.active{background:#7e22ce;color:#fff}
+  .filters input{font-size:12px;padding:4px 10px;border:0.5px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink);min-width:180px}
 
-  /* BOARD */
-  .board-wrap { overflow: auto; max-height: calc(100vh - 88px); }
-  .board { display: grid; width: max-content; }
-  .corner { position: sticky; left: 0; top: 0; z-index: 4; width: var(--row-head-w); min-width: var(--row-head-w); background: var(--ink); color: #94a3b8; font-size: 10px; text-transform: uppercase; letter-spacing: .08em; padding: 10px 12px; border-right: 0.5px solid #334155; border-bottom: 0.5px solid #334155; }
-  .col-head { position: sticky; top: 0; z-index: 3; background: var(--ink); color: #fff; border-right: 0.5px solid #334155; border-bottom: 0.5px solid #334155; padding: 10px 12px; min-width: var(--col-w); max-width: var(--col-w); }
-  .col-name { font-size: 13px; font-weight: 500; }
-  .col-type { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: .05em; margin-top: 2px; }
-  .row-head { position: sticky; left: 0; z-index: 2; background: var(--card); border-right: 0.5px solid var(--rule-hard); border-bottom: 0.5px solid var(--rule); padding: 10px; width: var(--row-head-w); min-width: var(--row-head-w); }
-  .row-name { font-weight: 500; font-size: 12px; }
-  .row-desc { font-size: 10px; color: var(--ink3); margin-top: 3px; line-height: 1.4; }
-  .cell { border-right: 0.5px solid var(--rule); border-bottom: 0.5px solid var(--rule); padding: 10px; background: var(--card); min-width: var(--col-w); max-width: var(--col-w); vertical-align: top; }
+  .board-wrap{overflow:auto;max-height:calc(100vh - 90px)}
+  .board{display:grid;width:max-content}
+  .corner{position:sticky;left:0;top:0;z-index:4;width:var(--row-head-w);min-width:var(--row-head-w);background:var(--ink);color:#94a3b8;font-size:10px;text-transform:uppercase;letter-spacing:.08em;padding:10px 12px;border-right:0.5px solid #334155;border-bottom:0.5px solid #334155}
+  .col-head{position:sticky;top:0;z-index:3;background:var(--ink);color:#fff;border-right:0.5px solid #334155;border-bottom:0.5px solid #334155;padding:10px 12px;min-width:var(--col-w);max-width:var(--col-w)}
+  .col-name{font-size:13px;font-weight:500}
+  .col-type{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+  .row-head{position:sticky;left:0;z-index:2;background:var(--card);border-right:0.5px solid var(--rule-hard);border-bottom:0.5px solid var(--rule);padding:10px;width:var(--row-head-w);min-width:var(--row-head-w)}
+  .row-name{font-weight:500;font-size:12px}
+  .row-desc{font-size:10px;color:var(--ink3);margin-top:3px;line-height:1.4}
+  .cell{border-right:0.5px solid var(--rule);border-bottom:0.5px solid var(--rule);padding:10px;background:var(--card);min-width:var(--col-w);max-width:var(--col-w);vertical-align:top}
 
-  /* CELL CONTENTS */
-  .shot-wrap { position: relative; margin-bottom: 8px; }
-  .shot-num { font-size: 9px; font-family: monospace; color: var(--ink3); padding: 2px 5px; background: var(--paper); border: 0.5px solid var(--rule); border-bottom: none; display: inline-block; }
-  .shot-img { width: 100%; display: block; border: 0.5px solid var(--rule); cursor: zoom-in; transition: opacity .15s; }
-  .shot-img:hover { opacity: .9; }
-  .shot-cap { font-size: 10px; color: var(--ink2); padding: 4px 0 2px; line-height: 1.4; }
-  .shot-date { font-size: 9px; font-family: monospace; color: var(--ink3); }
-  .shot-url { font-size: 9px; color: var(--verified); text-decoration: none; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .shot-url:hover { text-decoration: underline; }
+  .shot-wrap{margin-bottom:10px}
+  .shot-top{display:flex;align-items:center;gap:5px;margin-bottom:3px}
+  .shot-num{font-size:9px;font-family:monospace;color:var(--ink3);background:var(--paper);border:0.5px solid var(--rule);padding:1px 5px;border-radius:3px}
+  .type-badge{font-size:9px;padding:1px 6px;border-radius:20px;font-weight:500}
+  .type-docs{background:#eff6ff;color:#1d4ed8}
+  .type-product{background:#f0fdf4;color:#166534}
+  .type-youtube{background:#fef2f2;color:#dc2626}
+  .type-review{background:#f0fdf4;color:#15803d}
+  .type-article{background:#fdf4ff;color:#7e22ce}
+  .shot-img{width:100%;display:block;border:0.5px solid var(--rule);cursor:zoom-in;border-radius:2px}
+  .shot-img:hover{opacity:.9}
+  .shot-cap{font-size:10px;color:var(--ink2);padding:4px 0 2px;line-height:1.4}
+  .shot-date{font-size:9px;font-family:monospace;color:var(--ink3)}
+  .shot-url{font-size:9px;color:var(--verified);text-decoration:none;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .shot-url:hover{text-decoration:underline}
 
-  /* BADGES */
-  .badge-changed { display: inline-flex; align-items: center; gap: 3px; font-size: 9px; font-weight: 500; padding: 2px 6px; border-radius: 20px; background: var(--changebg); color: var(--change); margin-top: 4px; }
-  .badge-missing { display: flex; flex-direction: column; gap: 3px; padding: 8px; border: 0.5px dashed var(--rule-hard); background: var(--missingbg); border-radius: 4px; }
-  .badge-missing .m-label { font-size: 11px; color: var(--missing); font-style: italic; }
-  .badge-missing .m-date { font-size: 9px; font-family: monospace; color: var(--ink3); }
-  .badge-error { display: flex; flex-direction: column; gap: 3px; padding: 8px; border: 0.5px dashed #fca5a5; background: var(--dangerbg); border-radius: 4px; }
-  .badge-error .e-label { font-size: 11px; color: var(--danger); }
-  .badge-error .e-date { font-size: 9px; font-family: monospace; color: var(--ink3); }
+  .badge-changed{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:500;padding:2px 6px;border-radius:20px;background:var(--changebg);color:var(--change);margin-top:4px}
+  .badge-missing{display:flex;flex-direction:column;gap:3px;padding:8px;border:0.5px dashed var(--rule-hard);background:var(--missingbg);border-radius:4px}
+  .badge-missing .m-label{font-size:11px;color:var(--missing);font-style:italic}
+  .badge-missing .m-date{font-size:9px;font-family:monospace;color:var(--ink3)}
+  .badge-error{padding:8px;border:0.5px dashed #fca5a5;background:var(--dangerbg);border-radius:4px;font-size:10px;color:var(--danger)}
 
-  /* LIGHTBOX */
-  .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 100; align-items: center; justify-content: center; flex-direction: column; gap: 12px; }
-  .lightbox.open { display: flex; }
-  .lightbox img { max-width: 90vw; max-height: 80vh; object-fit: contain; border: 1px solid #334155; }
-  .lightbox-meta { color: #94a3b8; font-size: 12px; text-align: center; }
-  .lightbox-meta a { color: #7dd3fc; }
-  .lightbox-close { position: absolute; top: 16px; right: 20px; color: #fff; font-size: 28px; cursor: pointer; background: none; border: none; line-height: 1; }
+  .legend{display:flex;gap:12px;flex-wrap:wrap;padding:6px 12px;background:var(--paper);border-bottom:0.5px solid var(--rule);font-size:11px}
+  .leg{display:flex;align-items:center;gap:4px}
 
-  /* LOADING */
-  .loading { display: flex; align-items: center; justify-content: center; height: 200px; color: var(--ink3); font-size: 13px; gap: 8px; }
-  .spinner { width: 16px; height: 16px; border: 2px solid var(--rule); border-top-color: var(--verified); border-radius: 50%; animation: spin .7s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
+  .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:100;align-items:center;justify-content:center;flex-direction:column;gap:10px}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:92vw;max-height:82vh;object-fit:contain;border:1px solid #334155}
+  .lightbox-meta{color:#94a3b8;font-size:12px;text-align:center;max-width:600px}
+  .lightbox-meta a{color:#7dd3fc}
+  .lightbox-close{position:absolute;top:14px;right:18px;color:#fff;font-size:28px;cursor:pointer;background:none;border:none}
 
-  /* NO DATA */
-  .no-data { padding: 40px; text-align: center; color: var(--ink3); }
-  .no-data h2 { font-size: 16px; font-weight: 500; color: var(--ink2); margin-bottom: 8px; }
-  .no-data p { font-size: 13px; line-height: 1.7; max-width: 500px; margin: 0 auto; }
-  .no-data code { font-family: monospace; background: var(--paper); border: 0.5px solid var(--rule); padding: 1px 5px; border-radius: 3px; font-size: 12px; }
+  .loading{display:flex;align-items:center;justify-content:center;height:200px;color:var(--ink3);font-size:13px;gap:8px}
+  .spinner{width:16px;height:16px;border:2px solid var(--rule);border-top-color:var(--verified);border-radius:50%;animation:spin .7s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
 
-  /* FOOTER */
-  .footer { padding: 10px 16px; font-size: 11px; color: var(--ink3); border-top: 0.5px solid var(--rule); background: var(--card); display: flex; gap: 16px; flex-wrap: wrap; }
+  .no-data{padding:40px;text-align:center;color:var(--ink3)}
+  .no-data h2{font-size:16px;font-weight:500;color:var(--ink2);margin-bottom:8px}
+  .no-data p{font-size:13px;line-height:1.8;max-width:520px;margin:0 auto}
+
+  .footer{padding:8px 16px;font-size:11px;color:var(--ink3);border-top:0.5px solid var(--rule);background:var(--card);display:flex;gap:16px;flex-wrap:wrap}
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <h1>Competitor Intelligence Board</h1>
-  <div class="topbar-right">
+  <div style="display:flex;align-items:center;gap:12px">
     <span class="run-info" id="run-info">Loading…</span>
     <button class="refresh-btn" onclick="loadData()">↻ Refresh</button>
   </div>
 </div>
 
 <div class="filters">
-  <span class="filter-label">Filter:</span>
-  <span class="filter-pill" id="pill-changed" onclick="toggleFilter('changed')">Changed this week</span>
-  <span class="filter-pill" id="pill-missing" onclick="toggleFilter('missing')">Missing screenshots</span>
+  <span style="font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em">Sources:</span>
+  <span class="pill docs" id="f-docs" onclick="toggleFilter('docs')">📄 Docs</span>
+  <span class="pill" style="background:#f0fdf4;border-color:#bbf7d0;color:#166534" id="f-product" onclick="toggleFilter('product')">🏢 Product pages</span>
+  <span class="pill youtube" id="f-youtube" onclick="toggleFilter('youtube')">▶ YouTube</span>
+  <span class="pill review" id="f-review" onclick="toggleFilter('review')">★ Reviews</span>
+  <span class="pill article" id="f-article" onclick="toggleFilter('article')">📰 Articles</span>
+  <span style="margin-left:8px;font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em">Show:</span>
+  <span class="pill" id="f-changed" onclick="toggleFilter('changed')">🔔 Changed this week</span>
   <input type="text" id="search" placeholder="Search categories…" oninput="renderBoard()">
+</div>
+
+<div class="legend">
+  <span class="leg"><span class="type-badge type-docs">docs</span> Official documentation</span>
+  <span class="leg"><span class="type-badge type-product">product</span> Product / marketing page</span>
+  <span class="leg"><span class="type-badge type-youtube">youtube</span> YouTube video player</span>
+  <span class="leg"><span class="type-badge type-review">review</span> G2 / Capterra / Trustpilot</span>
+  <span class="leg"><span class="type-badge type-article">article</span> Tech article / news</span>
 </div>
 
 <div id="board-container">
@@ -118,12 +125,10 @@
 </div>
 
 <div class="footer">
-  <span>Screenshots captured automatically every Monday by GitHub Actions.</span>
-  <span>Click any screenshot to enlarge. Source links open the original page.</span>
+  <span>Screenshots captured automatically every Monday from official docs, YouTube, review sites and tech articles.</span>
   <span id="footer-meta"></span>
 </div>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
   <img id="lightbox-img" src="" alt="">
@@ -131,57 +136,50 @@
 </div>
 
 <script>
-// ─── Config ──────────────────────────────────────────────────────────────────
-
 const COMPETITORS = [
-  { slug: 'sectigo',      name: 'Sectigo',                  type: 'Commercial CA' },
-  { slug: 'globalsign',   name: 'GlobalSign',               type: 'Commercial CA' },
-  { slug: 'aws',          name: 'AWS Certificate Manager',  type: 'Cloud provider' },
-  { slug: 'letsencrypt',  name: "Let's Encrypt",            type: 'ACME CA' },
-  { slug: 'cloudflare',   name: 'Cloudflare',               type: 'CDN / cloud' },
+  { slug:'sectigo',     name:'Sectigo',               type:'Commercial CA' },
+  { slug:'globalsign',  name:'GlobalSign',             type:'Commercial CA' },
+  { slug:'aws',         name:'AWS Certificate Manager',type:'Cloud provider' },
+  { slug:'letsencrypt', name:"Let's Encrypt",          type:'ACME CA' },
+  { slug:'cloudflare',  name:'Cloudflare',             type:'CDN / cloud' },
 ];
 
 const CATEGORIES = [
-  { slug: 'dashboard',      name: 'Dashboard & landing',           desc: 'First-run experience and overview' },
-  { slug: 'inventory',      name: 'Certificate inventory',         desc: 'Listing, searching, filtering certificates' },
-  { slug: 'lifecycle',      name: 'Certificate lifecycle',         desc: 'Request, issue, renew, revoke' },
-  { slug: 'discovery',      name: 'Discovery',                     desc: 'Finding unknown certificates' },
-  { slug: 'analytics',      name: 'Analytics & reporting',         desc: 'Charts, exports, scheduled reports' },
-  { slug: 'administration', name: 'Administration',                desc: 'Users, roles, organisations' },
-  { slug: 'integrations',   name: 'Integrations & automation',     desc: 'API, CLI, ACME, Terraform' },
-  { slug: 'support',        name: 'Support model',                 desc: 'Help channels and human intervention' },
-  { slug: 'pricing',        name: 'Pricing & packaging',           desc: 'Published pricing and tiers' },
-  { slug: 'security',       name: 'Security & compliance',         desc: 'Audit, governance, certifications' },
+  { slug:'dashboard',      name:'Dashboard & landing',        desc:'First experience and overview' },
+  { slug:'inventory',      name:'Certificate inventory',      desc:'Listing, searching, filtering' },
+  { slug:'lifecycle',      name:'Certificate lifecycle',      desc:'Request, issue, renew, revoke' },
+  { slug:'discovery',      name:'Discovery',                  desc:'Finding unknown certificates' },
+  { slug:'analytics',      name:'Analytics & reporting',      desc:'Charts, exports, reports' },
+  { slug:'administration', name:'Administration',             desc:'Users, roles, organisations' },
+  { slug:'integrations',   name:'Integrations & automation',  desc:'API, CLI, ACME, Terraform' },
+  { slug:'support',        name:'Support & reviews',          desc:'Help channels, user sentiment' },
+  { slug:'pricing',        name:'Pricing & packaging',        desc:'Published pricing and tiers' },
+  { slug:'security',       name:'Security & compliance',      desc:'Audit, governance, news' },
 ];
 
-// Which categories each competitor genuinely has no UI for
+// Source types that are definitely not applicable for these competitors/categories
 const NOT_APPLICABLE = {
-  letsencrypt: ['dashboard', 'inventory', 'discovery', 'analytics', 'administration'],
+  letsencrypt: ['dashboard','inventory','discovery','analytics','administration'],
   aws: ['discovery'],
   cloudflare: ['discovery'],
 };
 
-// ─── State ───────────────────────────────────────────────────────────────────
+const TYPE_LABELS = { docs:'docs', product:'product', youtube:'youtube', review:'review', article:'article' };
 
 let DATA = null;
-let FILTERS = { changed: false, missing: false };
-let LIGHTBOX_QUEUE = [];
-let LIGHTBOX_IDX = 0;
-
-// ─── Data loading ─────────────────────────────────────────────────────────────
+// null = show all; array of type strings = show only those
+let ACTIVE_TYPES = null;
+let SHOW_CHANGED_ONLY = false;
 
 async function loadData() {
   document.getElementById('board-container').innerHTML =
     '<div class="loading"><div class="spinner"></div> Loading screenshots…</div>';
-
   try {
-    // Cache-bust so we always get the latest after a Monday run
     const res = await fetch('data/latest.json?t=' + Date.now());
-    if (!res.ok) throw new Error('data/latest.json not found');
+    if (!res.ok) throw new Error('no data yet');
     DATA = await res.json();
     renderBoard();
-  } catch (err) {
-    // No data yet — show a helpful empty state
+  } catch {
     showNoData();
   }
 }
@@ -191,54 +189,44 @@ function showNoData() {
     <div class="no-data">
       <h2>No screenshots yet</h2>
       <p>
-        The board is ready. Screenshots will appear here after the first GitHub Actions run.<br><br>
-        To capture screenshots now without waiting for Monday:<br><br>
+        The board populates after the first GitHub Actions run.<br><br>
+        To get screenshots now without waiting for Monday:<br><br>
         1. Go to your GitHub repository<br>
-        2. Click <strong>Actions</strong> in the top menu<br>
-        3. Click <strong>Weekly competitor screenshots</strong> on the left<br>
-        4. Click <strong>Run workflow</strong> → <strong>Run workflow</strong><br><br>
-        Come back in about 10 minutes and refresh this page.
+        2. Click the <strong>Actions</strong> tab<br>
+        3. Click <strong>Weekly competitor screenshots</strong><br>
+        4. Click <strong>Run workflow → Run workflow</strong><br><br>
+        Come back in about 15 minutes and refresh.
       </p>
     </div>`;
   document.getElementById('run-info').textContent = 'No data yet';
 }
 
-// ─── Rendering ────────────────────────────────────────────────────────────────
-
 function renderBoard() {
   if (!DATA) return;
 
   const meta = DATA.__meta || {};
-  const lastRun = meta.lastRun || '—';
-  const errors = (meta.errors || []).length;
   document.getElementById('run-info').textContent =
-    `Last run: ${lastRun}${errors ? ` · ${errors} error(s)` : ''}`;
+    `Last run: ${meta.lastRun || '—'} · ${meta.captured || 0}/${meta.totalPages || 0} captured · ${(meta.errors||[]).length} failed`;
   document.getElementById('footer-meta').textContent =
-    `${meta.totalPages || 0} pages monitored · ${errors} failed last run`;
+    `Sources: docs · product pages · YouTube · reviews · articles`;
 
   const search = (document.getElementById('search').value || '').toLowerCase();
   const visibleCats = CATEGORIES.filter(c =>
     !search || c.name.toLowerCase().includes(search) || c.desc.toLowerCase().includes(search)
   );
 
-  const cols = COMPETITORS.length;
-  let html = `<div class="board" style="grid-template-columns:${180}px repeat(${cols},260px)">`;
+  let html = `<div class="board" style="grid-template-columns:${175}px repeat(${COMPETITORS.length},270px)">`;
 
-  // Corner
-  html += `<div class="corner">Category / workflow</div>`;
-
-  // Column headers
-  COMPETITORS.forEach(comp => {
-    html += `<div class="col-head"><div class="col-name">${comp.name}</div><div class="col-type">${comp.type}</div></div>`;
+  // Corner + column headers
+  html += `<div class="corner">Category</div>`;
+  COMPETITORS.forEach(c => {
+    html += `<div class="col-head"><div class="col-name">${c.name}</div><div class="col-type">${c.type}</div></div>`;
   });
 
   // Rows
   visibleCats.forEach(cat => {
     html += `<div class="row-head"><div class="row-name">${cat.name}</div><div class="row-desc">${cat.desc}</div></div>`;
-
-    COMPETITORS.forEach(comp => {
-      html += renderCell(comp, cat);
-    });
+    COMPETITORS.forEach(comp => { html += renderCell(comp, cat); });
   });
 
   html += '</div>';
@@ -246,88 +234,84 @@ function renderBoard() {
 }
 
 function renderCell(comp, cat) {
-  // Not applicable
-  const na = (NOT_APPLICABLE[comp.slug] || []).includes(cat.slug);
-  if (na) {
-    return `<div class="cell">
-      <div class="badge-missing">
-        <span class="m-label">Not applicable to this service model</span>
-        <span class="m-date">By design — no equivalent surface</span>
-      </div>
-    </div>`;
+  if ((NOT_APPLICABLE[comp.slug] || []).includes(cat.slug)) {
+    return `<div class="cell"><div class="badge-missing"><span class="m-label">Not applicable to this service model</span><span class="m-date">By design</span></div></div>`;
   }
 
-  const compData = DATA[comp.slug] || {};
-  const shots = compData[cat.slug] || [];
+  const allShots = ((DATA[comp.slug] || {})[cat.slug] || []);
 
-  // No screenshots at all
+  // Filter by active source types
+  const shots = ACTIVE_TYPES
+    ? allShots.filter(s => ACTIVE_TYPES.includes(s.type))
+    : allShots;
+
+  if (shots.length === 0 && allShots.length === 0) {
+    return `<div class="cell"><div class="badge-missing"><span class="m-label">Not yet captured</span><span class="m-date">Appears after first run</span></div></div>`;
+  }
   if (shots.length === 0) {
-    return `<div class="cell">
-      <div class="badge-missing">
-        <span class="m-label">Not yet captured</span>
-        <span class="m-date">Will appear after first Monday run</span>
-      </div>
-    </div>`;
+    return `<div class="cell" style="background:var(--paper)"><div class="badge-missing"><span class="m-label">Hidden by source filter</span></div></div>`;
   }
 
-  // Check filters
   const today = DATA.__meta?.lastRun;
-  const latestShot = shots[shots.length - 1];
-  const isNew = latestShot.capturedAt === today;
-  const hasError = !!latestShot.lastError;
+  const latest = shots[shots.length - 1];
+  const isNew = latest.capturedAt === today;
 
-  if (FILTERS.changed && !isNew) return `<div class="cell" style="background:var(--paper)"></div>`;
-  if (FILTERS.missing && shots.length > 0 && !hasError) return `<div class="cell" style="background:var(--paper)"></div>`;
+  if (SHOW_CHANGED_ONLY && !isNew) {
+    return `<div class="cell" style="background:var(--paper)"></div>`;
+  }
 
   let inner = '';
-
-  // Show up to 3 screenshots stacked
   const visible = shots.slice(-3).reverse();
+
   visible.forEach((shot, i) => {
     const imgPath = `screenshots/${shot.file}`;
-    const isLatest = i === 0;
-    inner += `
-      <div class="shot-wrap">
-        <div class="shot-num">Step ${visible.length - i}</div>
-        <img
-          class="shot-img"
-          src="${imgPath}"
-          alt="${shot.label}"
-          loading="lazy"
-          onclick="openLightbox('${imgPath}', '${escHtml(shot.label)}', '${escHtml(shot.url)}', '${shot.capturedAt}')"
-          onerror="this.parentElement.innerHTML='<div class=\\'badge-error\\'><span class=\\'e-label\\'>Image not loaded</span><span class=\\'e-date\\'>${shot.capturedAt}</span></div>'"
-        >
-        <div class="shot-cap">${escHtml(shot.label)}</div>
-        <div class="shot-date">Captured ${shot.capturedAt}</div>
-        <a class="shot-url" href="${escHtml(shot.url)}" target="_blank" rel="noopener noreferrer">${escHtml(shot.url)}</a>
-        ${isLatest && isNew ? '<div><span class="badge-changed">↑ Updated this week</span></div>' : ''}
-      </div>`;
+    const typeClass = `type-${shot.type || 'docs'}`;
+    const typeLabel = TYPE_LABELS[shot.type] || shot.type;
+
+    inner += `<div class="shot-wrap">
+      <div class="shot-top">
+        <span class="shot-num">${visible.length - i}</span>
+        <span class="type-badge ${typeClass}">${typeLabel}</span>
+      </div>
+      <img class="shot-img" src="${imgPath}" alt="${esc(shot.label)}" loading="lazy"
+        onclick="openLightbox('${imgPath}','${esc(shot.label)}','${esc(shot.url)}','${shot.capturedAt}','${typeLabel}')"
+        onerror="this.parentElement.innerHTML='<div class=badge-error>Could not load — ${shot.capturedAt}</div>'">
+      <div class="shot-cap">${esc(shot.label)}</div>
+      <div class="shot-date">Captured ${shot.capturedAt}</div>
+      <a class="shot-url" href="${esc(shot.url)}" target="_blank" rel="noopener noreferrer">${esc(shot.url)}</a>
+      ${i === 0 && isNew ? '<div><span class="badge-changed">↑ Updated this week</span></div>' : ''}
+    </div>`;
   });
 
-  if (hasError) {
-    inner += `<div class="badge-error">
-      <span class="e-label">Last capture failed — showing previous</span>
-      <span class="e-date">${latestShot.lastError.date}: ${escHtml(latestShot.lastError.message)}</span>
-    </div>`;
+  if (latest.lastError) {
+    inner += `<div class="badge-error">Last capture failed (${latest.lastError.date})</div>`;
   }
 
   return `<div class="cell">${inner}</div>`;
 }
 
-// ─── Filters ─────────────────────────────────────────────────────────────────
-
 function toggleFilter(name) {
-  FILTERS[name] = !FILTERS[name];
-  document.getElementById(`pill-${name}`).classList.toggle('active', FILTERS[name]);
+  if (name === 'changed') {
+    SHOW_CHANGED_ONLY = !SHOW_CHANGED_ONLY;
+    document.getElementById('f-changed').classList.toggle('active', SHOW_CHANGED_ONLY);
+    renderBoard();
+    return;
+  }
+  // Source type filters
+  const SOURCE_TYPES = ['docs','product','youtube','review','article'];
+  if (!ACTIVE_TYPES) ACTIVE_TYPES = [...SOURCE_TYPES];
+  const idx = ACTIVE_TYPES.indexOf(name);
+  if (idx >= 0) ACTIVE_TYPES.splice(idx, 1);
+  else ACTIVE_TYPES.push(name);
+  if (ACTIVE_TYPES.length === SOURCE_TYPES.length) ACTIVE_TYPES = null; // back to show-all
+  document.getElementById(`f-${name}`).classList.toggle('active', ACTIVE_TYPES ? !ACTIVE_TYPES.includes(name) : false);
   renderBoard();
 }
 
-// ─── Lightbox ────────────────────────────────────────────────────────────────
-
-function openLightbox(src, label, url, date) {
+function openLightbox(src, label, url, date, type) {
   document.getElementById('lightbox-img').src = src;
   document.getElementById('lightbox-meta').innerHTML =
-    `<strong>${label}</strong> · Captured ${date}<br>
+    `<strong>${label}</strong> · ${type} · Captured ${date}<br>
      <a href="${url}" target="_blank" rel="noopener noreferrer">${url}</a>`;
   document.getElementById('lightbox').classList.add('open');
 }
@@ -336,17 +320,11 @@ function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
 }
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeLightbox();
-});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
-// ─── Utils ───────────────────────────────────────────────────────────────────
-
-function escHtml(str) {
-  return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+function esc(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
-
-// ─── Init ────────────────────────────────────────────────────────────────────
 
 loadData();
 </script>
