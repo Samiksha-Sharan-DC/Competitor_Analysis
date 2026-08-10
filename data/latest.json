@@ -1,7 +1,161 @@
 {
   "__meta": {
-    "lastRun": null,
-    "totalPages": 0,
+    "lastRun": "2026-08-10",
+    "totalPages": 16,
     "errors": []
+  },
+  "sectigo": {
+    "dashboard": [
+      {
+        "label": "Dashboard overview",
+        "url": "https://sectigo.com/products/ssl-certificates",
+        "file": "sectigo__dashboard__dashboard-overview__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "sectigo__dashboard__dashboard-overview"
+      }
+    ],
+    "lifecycle": [
+      {
+        "label": "Certificate enrollment",
+        "url": "https://docs.sectigo.com/scm/en/certificates/ssl-certificates/index.html",
+        "file": "sectigo__lifecycle__certificate-enrollment__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "sectigo__lifecycle__certificate-enrollment"
+      }
+    ],
+    "integrations": [
+      {
+        "label": "ACME & API",
+        "url": "https://docs.sectigo.com/scm/en/api/index.html",
+        "file": "sectigo__integrations__acme-api__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "sectigo__integrations__acme-api"
+      }
+    ]
+  },
+  "globalsign": {
+    "dashboard": [
+      {
+        "label": "Atlas portal overview",
+        "url": "https://www.globalsign.com/en/ssl/managed-ssl/",
+        "file": "globalsign__dashboard__atlas-portal-overview__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "globalsign__dashboard__atlas-portal-overview"
+      }
+    ],
+    "lifecycle": [
+      {
+        "label": "Certificate ordering",
+        "url": "https://support.globalsign.com/ssl/ssl-certificates-installation/order-ssl-certificate",
+        "file": "globalsign__lifecycle__certificate-ordering__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "globalsign__lifecycle__certificate-ordering"
+      }
+    ],
+    "inventory": [
+      {
+        "label": "Certificate inventory",
+        "url": "https://support.globalsign.com/atlas/atlas-ssl-tls-management",
+        "file": "globalsign__inventory__certificate-inventory__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "globalsign__inventory__certificate-inventory"
+      }
+    ]
+  },
+  "aws": {
+    "dashboard": [
+      {
+        "label": "ACM overview",
+        "url": "https://aws.amazon.com/certificate-manager/",
+        "file": "aws__dashboard__acm-overview__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "aws__dashboard__acm-overview"
+      }
+    ],
+    "lifecycle": [
+      {
+        "label": "Requesting a certificate",
+        "url": "https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html",
+        "file": "aws__lifecycle__requesting-a-certificate__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "aws__lifecycle__requesting-a-certificate"
+      }
+    ],
+    "pricing": [
+      {
+        "label": "ACM pricing",
+        "url": "https://aws.amazon.com/certificate-manager/pricing/",
+        "file": "aws__pricing__acm-pricing__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "aws__pricing__acm-pricing"
+      }
+    ]
+  },
+  "letsencrypt": {
+    "dashboard": [
+      {
+        "label": "Getting started",
+        "url": "https://letsencrypt.org/getting-started/",
+        "file": "letsencrypt__dashboard__getting-started__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "letsencrypt__dashboard__getting-started"
+      }
+    ],
+    "lifecycle": [
+      {
+        "label": "How it works",
+        "url": "https://letsencrypt.org/how-it-works/",
+        "file": "letsencrypt__lifecycle__how-it-works__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "letsencrypt__lifecycle__how-it-works"
+      }
+    ],
+    "pricing": [
+      {
+        "label": "Pricing — free",
+        "url": "https://letsencrypt.org/about/",
+        "file": "letsencrypt__pricing__pricing-free__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "letsencrypt__pricing__pricing-free"
+      }
+    ]
+  },
+  "cloudflare": {
+    "dashboard": [
+      {
+        "label": "SSL/TLS overview",
+        "url": "https://www.cloudflare.com/ssl/",
+        "file": "cloudflare__dashboard__ssl-tls-overview__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "cloudflare__dashboard__ssl-tls-overview"
+      }
+    ],
+    "lifecycle": [
+      {
+        "label": "Edge certificates",
+        "url": "https://developers.cloudflare.com/ssl/edge-certificates/",
+        "file": "cloudflare__lifecycle__edge-certificates__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "cloudflare__lifecycle__edge-certificates"
+      }
+    ],
+    "integrations": [
+      {
+        "label": "API & Terraform",
+        "url": "https://developers.cloudflare.com/ssl/edge-certificates/advanced-certificate-manager/",
+        "file": "cloudflare__integrations__api-terraform__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "cloudflare__integrations__api-terraform"
+      }
+    ],
+    "pricing": [
+      {
+        "label": "Pricing",
+        "url": "https://www.cloudflare.com/plans/",
+        "file": "cloudflare__pricing__pricing__2026-08-10.png",
+        "capturedAt": "2026-08-10",
+        "key": "cloudflare__pricing__pricing"
+      }
+    ]
   }
 }
